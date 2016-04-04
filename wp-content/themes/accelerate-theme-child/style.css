@@ -1,0 +1,291 @@
+/*
+ Theme Name:   Accelerate Theme Child
+ Theme URI:    http://example.com/accelerate-theme-child/
+ Description:  Accelerate Child Theme 
+ Author:       lolga
+ Author URI:   http://lolga.org
+ Template:     accelerate-theme
+ Version:      1.0.0
+ Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  accelerate-theme-child
+*/
+
+@import url("../accelerate-theme/style.css");
+
+.home-page {
+    background: url("img/image2.jpg") no-repeat scroll left center / cover rgba(0, 0, 0, 0);
+}
+
+#masthead {
+    background: none repeat scroll 0 0 #45ac9d;
+    height: 30px;
+}
+
+#page #masthead {
+    background: none repeat scroll 0 0 #37B3F1;
+    height: 30px;
+} 
+
+
+#masthead nav {
+     display: flex;
+}
+
+/* #masthead a {
+	text-align: center;
+} */
+
+#masthead nav ul li {
+	float: left;
+	margin:0 10px;
+}
+
+.button {
+    background: none repeat scroll 0 0 #45ac9d;
+}
+
+.blog-post {
+	width: 50%;
+}
+
+.blog-post h4 {
+	font-size: 16px;
+	font-family: 'Montserrat';
+	color: #a6a6a6;
+	text-transform: uppercase;
+}
+
+.blog-post h2 {
+	font-size: 24px;
+	font-family: 'Montserrat';
+	font-weight: bold;
+}
+
+.blog-post .read-more-link {
+	font-size: 24px;
+	font-family: 'Montserrat';
+	font-weight: bold;
+	color: #45ac9d;
+	text-transform: uppercase;
+}
+/* wtf??? */
+
+
+/* Project */
+article.project {
+	margin:40px 0 0;
+}
+
+aside.project-sidebar {
+	float: left;
+	width: 40%;
+	margin: 0 40px 0 0;
+}
+
+div.project-images {
+	float: right;
+	width: 50%;
+
+}
+
+div.project-images img {
+	margin-bottom: 50px;
+	border: 1px solid #dddddd;
+	margin-top: 10%;
+}
+
+aside.project-sidebar h5 {
+	font-size: 16px;
+	color: #9C9C9C;
+}
+
+/* Featured work */
+.individual-featured-work {
+	display: inline-block;
+	width: 30%;
+	padding-bottom: 10%;
+    overflow: hidden;
+    margin: 0;
+    margin-right: 3%;
+}
+/*can be used inline-block  */
+
+.featured-work{
+	margin-bottom: 20px
+}
+
+section.featured-work ul {
+	list-style: none;
+
+}
+
+section.featured-work h4 {
+	text-align: center;
+}
+
+section.featured-work figure {
+	align: center;
+}
+
+ .individual-featured-work h5 {
+ 	text-align: center;
+ 	font-weight: 400;
+ 	margin-top: 20px;
+ }
+
+ .individual-featured-work li {
+ 	margin: 10px;
+ }
+
+ /*Archive case studies */
+.project-sidebar p {
+    margin-top: 24px;
+}
+
+/* Front page */
+
+div.front-page-text {
+	margin-bottom: 10%
+}
+
+/* blue #37B3F1 */
+
+.blog-post .read-more-link {
+    color: #37B3F1;
+ }
+
+#masthead {
+    background: none repeat scroll 0 0 #37B3F1;
+    height: 40px;
+}
+
+.button {
+    background: none repeat scroll 0 0 #37B3F1;
+}
+
+.site-navigation {
+
+}
+
+/*About me */
+
+/*article.bio {
+	margin:40px 0 0;
+}*/
+
+
+aside.bio-sidebar {
+	float: left;
+	width: 60%;
+	margin: 0 20px 0 0;
+}
+
+aside.bio-sidebar a {
+    font-weight: bolder;
+    color: #37B3F1;
+
+}
+
+div.bio-images {
+	float: right;
+	width: 35%;
+	
+}
+
+div.bio-images img {
+	margin-top: 20%;
+	
+}
+
+/* Contact Me*/
+#content {
+	width: 80%;
+    margin-left: 8%;
+    margin-top: 5%;
+}
+
+
+#ninja_forms_field_1_div_wrap {
+    width: 48%;
+    display: inline-block;
+    
+}
+
+
+#ninja_forms_field_2_div_wrap {
+	width: 48%;
+    display: inline-block;
+    float: right;
+
+}
+
+#ninja_forms_field_3_div_wrap {
+    width: 100%;
+
+}
+
+
+#nf_submit_1 {
+	float: right;
+	
+}
+
+#ninja_forms_field_5 {
+	background-color: #37B3F1;
+	color: white;
+	border-color: #37B3F1;
+	width: 220px;
+    height: 60px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+#ninja_forms_field_1_label {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+#ninja_forms_field_2_label {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+#ninja_forms_field_3_label {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+#ninja_forms_form_1_response_msg {
+	
+	font-size: 16px;
+    font-weight: bolder;
+    text-align: center;
+
+}
+
+#ninja_forms_form_1_response_msg p {
+	margin: 150px;
+}
+
+/* Footer */
+
+
+.social-media-navigation {
+	margin-right: 10%;
+
+}
+
+.social-media-navigation ul {
+	list-style: none;
+    display: inline-flex;
+    width: 500px;
+}
+
+.social-media-navigation li {
+	margin-left: 10px;
+}
+
+/*.social-media-navigation a {
+	width: 80px;
+}*/

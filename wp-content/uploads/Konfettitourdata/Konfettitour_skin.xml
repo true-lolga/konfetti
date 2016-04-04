@@ -1,0 +1,1505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano version="1.17">
+
+    
+  <!-- Spot Style - Default Point Spot Style 1 -->
+  <style name="IconDefaultPointSpotStyle1"
+         url="%FIRSTXML%/spots/hotspot_neutral_sequence_user_defaultpoint0.png"
+         visible="false"
+
+         frame="0"
+         lastframe="17"
+         framewidth="40"
+         frameheight="40"
+         stopspotsequence="false"
+         onloaded="setdefaultanimatedspotframe();startspotanimation(0.1);if(scene[get(xml.scene)].planar,if(zoom,set(zoom, false);););"
+
+         edge="bottom" ox="0" oy="0"
+         zoom="true"
+         
+         onhover="onhoverIconDefaultPointSpotStyle1"
+         onover="onoverIconDefaultPointSpotStyle1"
+         onout="onoutIconDefaultPointSpotStyle1"
+         height="50"
+         width="50"
+         />
+  <action name="onhoverIconDefaultPointSpotStyle1">
+    showtooltip(hotspot);
+  </action>
+  <action name="onoverIconDefaultPointSpotStyle1">
+
+
+pauseautorotation();
+  </action>
+  <action name="onoutIconDefaultPointSpotStyle1">
+    hideTooltip();
+
+
+resumeautorotation();
+  </action>
+
+	<!-- ***************** -->
+	<!-- D-Pad Control Bar -->
+	<!-- ***************** -->
+
+
+<krpano crosscornerbarbarbuilt="false" crosscornerbarhorizontalwidth="0" crosscornerbarverticalheight="0" crosscornerbarIsOpened="false" />
+
+<events name="crosscornerbarevents" onxmlcomplete="crosscornerbarbuildMenuBar();" keep="true"/>
+
+<action name="crosscornerbarbuildMenuBar">
+	ifnot (crosscornerbarbarbuilt, crosscornerbarbuildMenu(); set(crosscornerbarbarbuilt, true););
+</action>
+
+<action name="crosscornerbarbuildMenu">
+	
+	
+	
+	set(crosscornerbarbutton_pos, 10);
+
+		if (device.fullscreensupport,
+			set(layer[crosscornerbarbtn_openfs].y, get(crosscornerbarbutton_pos));
+			set(layer[crosscornerbarbtn_closefs].y, get(crosscornerbarbutton_pos));
+			inc(crosscornerbarbutton_pos, 40);
+		);
+	
+		if (device.desktop,
+			set(layer[crosscornerbarbtn_ctrlmode_drag_to].y, get(crosscornerbarbutton_pos));
+			set(layer[crosscornerbarbtn_ctrlmode_move_to].y, get(crosscornerbarbutton_pos));
+			inc(crosscornerbarbutton_pos, 40);
+		);
+	
+
+		set(crosscornerbarDisplayGryoscopeButton, false);
+		if (device.tablet, set(crosscornerbarDisplayGryoscopeButton, true););
+		if (device.mobile, set(crosscornerbarDisplayGryoscopeButton, true););
+		if(crosscornerbarDisplayGryoscopeButton,
+			set(layer[crosscornerbarbtn_gyroscope_on].y, get(crosscornerbarbutton_pos));
+			set(layer[crosscornerbarbtn_gyroscope_off].y, get(crosscornerbarbutton_pos));
+			inc(crosscornerbarbutton_pos, 40);
+		);
+
+	
+		if (device.desktop,
+			set(layer[crosscornerbarbtn_out].y, get(crosscornerbarbutton_pos));
+			inc(crosscornerbarbutton_pos, 40);
+				set(layer[crosscornerbarzoom_slider_bg].y, get(crosscornerbarbutton_pos));
+				inc(crosscornerbarbutton_pos, 70);
+			set(layer[crosscornerbarbtn_in].y, get(crosscornerbarbutton_pos));
+			inc(crosscornerbarbutton_pos, 40);
+		);
+	
+		set(layer[crosscornerbarbtn_autorotate_on ].y, get(crosscornerbarbutton_pos));
+		set(layer[crosscornerbarbtn_autorotate_off].y, get(crosscornerbarbutton_pos));
+		inc(crosscornerbarbutton_pos, 40);
+	
+
+
+	
+	if (crosscornerbarbutton_pos != 10,
+		set(layer[crosscornerbarmenu_vertical_bg].height, get(crosscornerbarbutton_pos));
+		set(layer[crosscornerbarmenu_vertical_bg_border].height, get(crosscornerbarbutton_pos));
+		set(crosscornerbarverticalheight, get(crosscornerbarbutton_pos));
+	,
+		set(layer[crosscornerbarmenu_vertical_bg].height, 0);
+	);
+	
+	
+	
+	set(crosscornerbarbutton_pos, 10);
+	
+	
+	
+
+		set(layer[crosscornerbarbtn_sound_off].x, get(crosscornerbarbutton_pos));
+		set(layer[crosscornerbarbtn_sound_on ].x, get(crosscornerbarbutton_pos));
+		inc(crosscornerbarbutton_pos, 40);
+		set(layer[crosscornerbarVolumeBarContainer].x, get(crosscornerbarbutton_pos));
+		inc(crosscornerbarbutton_pos, get(layer[crosscornerbarVolumeBarContainer].width));
+		inc(crosscornerbarbutton_pos, 10);
+
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	if (crosscornerbarbutton_pos != 10,
+		set(layer[crosscornerbarmenu_horizontal_bg].width, get(crosscornerbarbutton_pos));
+		set(layer[crosscornerbarmenu_horizontal_bg_border].width, get(crosscornerbarbutton_pos));
+		set(crosscornerbarhorizontalwidth, get(crosscornerbarbutton_pos));
+	,
+		set(layer[crosscornerbarmenu_horizontal_bg].width, 0);
+	);
+	
+	
+	
+	
+	crosscornerbarSetVolumeBarOffsetX();
+</action>
+
+
+<events name="crosscornerbarStartTourEvents" onTourStart="crosscornerbarCallOnStartTour();" keep="true" />
+
+<action name="crosscornerbarCallOnStartTour">
+	
+	showTourControls();
+</action>
+
+
+	<action name="crosscornerbarSetVolumeBarOffsetX">
+		
+		
+		sub(volumeBarPosX, get(layer[crosscornerbarmenu_horizontal_bg].width), get(layer[crosscornerbarVolumeBarContainer].x));
+		add(volumeBarPosX, get(layer[get(layer[crosscornerbarVolumeBarContainer].parent)].x));
+		sub(volumeBarPosX, get(layer[crosscornerbarVolumeBarContainer].width));
+		
+		set(layer[crosscornerbarVolumeBarContainer].xoffset, get(volumeBarPosX));
+		
+		crosscornerbarSetupVolumeBar();
+	</action>
+	
+	
+	<action name="crosscornerbarSetupVolumeBar">
+		crosscornerbarCalculateSegmentWidth();
+		
+		for(set(i,0), i LT layer[crosscornerbarVolumeBarContainer].segmentCount, inc(i), 
+			crosscornerbarCreateVolumeSegment(get(i));
+		);
+	</action>
+	
+	<action name="crosscornerbarCalculateSegmentWidth">
+		sub(layer[crosscornerbarVolumeBarContainer].intervalCount, get(layer[crosscornerbarVolumeBarContainer].segmentCount), 1);
+		
+		mul(totalIntervalWidth, get(layer[crosscornerbarVolumeBarContainer].intervalWidth), get(layer[crosscornerbarVolumeBarContainer].intervalCount));
+		
+		sub(totalSegmentWidth, get(layer[crosscornerbarVolumeBarContainer].width), get(totalIntervalWidth));
+		
+		div(layer[crosscornerbarVolumeBarContainer].segmentWidth, get(totalSegmentWidth), get(layer[crosscornerbarVolumeBarContainer].segmentCount));
+		
+		add(layer[crosscornerbarVolumeBarContainer].incrementPosX, get(layer[crosscornerbarVolumeBarContainer].segmentWidth), get(layer[crosscornerbarVolumeBarContainer].intervalWidth));
+		
+		div(layer[crosscornerbarVolumeBarContainer].incrementHeight, get(layer[crosscornerbarVolumeBarContainer].height), get(layer[crosscornerbarVolumeBarContainer].segmentCount));
+	</action>
+	
+	<action name="crosscornerbarCreateVolumeSegment">
+		set(volumeSegmentName, 'volumeSegment_');
+		txtadd(volumeSegmentName, %1);
+		
+		mul(posX, get(layer[crosscornerbarVolumeBarContainer].incrementPosX), %1);
+		
+		mul(segmentHeight, get(layer[crosscornerbarVolumeBarContainer].incrementHeight), %1);
+		add(segmentHeight, get(layer[crosscornerbarVolumeBarContainer].incrementHeight));
+		
+		addlayer(get(volumeSegmentName));
+		set(layer[get(volumeSegmentName)].keep, true);
+		set(layer[get(volumeSegmentName)].type, container);
+		set(layer[get(volumeSegmentName)].align, bottomleft);
+		set(layer[get(volumeSegmentName)].parent, crosscornerbarVolumeBarContainer);
+		set(layer[get(volumeSegmentName)].x, get(posX));
+		set(layer[get(volumeSegmentName)].width, get(layer[crosscornerbarVolumeBarContainer].segmentWidth));
+		set(layer[get(volumeSegmentName)].height, get(segmentHeight));
+		
+		set(layer[get(volumeSegmentName)].bgcolor, get(layer[crosscornerbarVolumeBarContainer].lightColor));
+		set(layer[get(volumeSegmentName)].bgalpha, 1);
+	</action>
+	
+	<action name="crosscornerbarAdjustHighlightToVolume">
+		mul(segmentToHighlight, %1, get(layer[crosscornerbarVolumeBarContainer].segmentCount));
+		div(segmentToHighlight, 100);
+		Math.ceil(segmentToHighlight); 
+		
+		for(set(i,0), i LT layer[crosscornerbarVolumeBarContainer].segmentCount, inc(i), 
+			set(volumeSegmentName, 'volumeSegment_');
+			txtadd(volumeSegmentName, get(i));
+			
+			if(i LT segmentToHighlight,
+				set(layer[get(volumeSegmentName)].bgcolor, get(layer[crosscornerbarVolumeBarContainer].lightColor));
+				set(layer[get(volumeSegmentName)].bgalpha, 1.0);
+			,
+				set(layer[get(volumeSegmentName)].bgcolor, get(layer[crosscornerbarVolumeBarContainer].darkColor));
+				set(layer[get(volumeSegmentName)].bgalpha, 0.4);
+			);
+		);
+	</action>
+	
+	<action name="crosscornerbarVolumeBarClickHandler">
+		if(true,
+			
+			sub(localPosX, stagewidth, get(layer[crosscornerbarVolumeBarContainer].xoffset));
+			sub(localPosX, mouse.x);
+			sub(localX, get(layer[crosscornerbarVolumeBarContainer].width), get(localPosX));
+		,
+			
+			sub(localX, mouse.x, get(layer[crosscornerbarVolumeBarContainer].xoffset));
+		);
+		
+		mul(percent, get(localX), 100);
+		div(percent, get(layer[crosscornerbarVolumeBarContainer].width));
+		Math.ceil(percent);
+		
+		
+		setTourSoundsVolume(get(percent));
+		
+		
+		if(tour_soundson == false,
+			playTourSounds();
+		);
+		
+		crosscornerbarAdjustHighlightToVolume(get(percent));
+	</action>
+	
+
+
+<style name="crosscornerbarbtn_vertical_style"
+	keep="true"
+	align="bottom"
+	onhover="crosscornerbarshowVerticalMenuTooltip();"
+    onout="hideTooltip();"
+	crop="0| 0|30|30"
+	onovercrop="0|30|30|30"
+	ondowncrop="0|60|30|30"
+	x="0"
+	/>
+<style name="crosscornerbarbtn_vertical_style_alpha"
+	alpha="1.0"
+	devices="tablet|mobile"
+	/>
+<style name="crosscornerbarbtn_vertical_style_alpha"
+	alpha="0.2"
+	devices="desktop"
+	/>
+
+<style name="crosscornerbarmenu_bg_alpha"
+	alpha="0.2"
+	devices="desktop"
+	/>
+<style name="crosscornerbarmenu_bg_alpha"
+	alpha="0.5"
+	devices="tablet|mobile"
+	/>
+
+<layer name="crosscornerbarmenu_vertical_bg"
+	url="%FIRSTXML%/graphics/crosscornerbar/btn_bg_vertical.png"
+	keep="true"
+	align="bottomright"
+	x="64"
+	y="118"
+	edge="bottom"
+	zorder="0"
+	scale9grid="12|10|3|40"
+	style="crosscornerbarmenu_bg_alpha"
+	visible="false"
+	/>
+
+<layer name="crosscornerbarmenu_vertical_bg_border"
+	url="%FIRSTXML%/graphics/crosscornerbar/btn_bg_border_vertical.png"
+	keep="true"
+	align="bottomright"
+	x="64"
+	y="118"
+	edge="bottom"
+	zorder="1"
+	scale9grid="12|10|3|40"
+	onout="crosscornerbarvertical_onout_action();"
+	onover="crosscornerbarvertical_onover_action();"
+	visible="false"
+	>
+
+  <layer name="crosscornerbarbtn_autorotate_on"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_start_autorotation.png"
+          onclick="startautorotation();"
+          style="crosscornerbarbtn_vertical_style|crosscornerbarbtn_vertical_style_alpha"
+          visible="false"
+          tooltip="controlBar_dpadautorotateOnTip"
+          />
+  <layer name="crosscornerbarbtn_autorotate_off"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_stop_autorotation.png"
+          onclick="stopautorotation();"
+          style="crosscornerbarbtn_vertical_style|crosscornerbarbtn_vertical_style_alpha"
+          visible="false"
+          tooltip="controlBar_dpadautorotateOffTip"
+          />
+
+
+  <layer name="crosscornerbarbtn_in"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_zoom_in.png"
+          style="crosscornerbarbtn_vertical_style|crosscornerbarbtn_vertical_style_alpha"
+          ondown="set(fov_moveforce, -1);"
+          onup="set(fov_moveforce, 0);"
+          tooltip="controlBar_dpadzoomInTip"
+          visible="false"
+          devices="desktop"
+          />
+
+  <layer name="crosscornerbarbtn_out"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_zoom_out.png"
+          style="crosscornerbarbtn_vertical_style|crosscornerbarbtn_vertical_style_alpha"
+          ondown="set(fov_moveforce, +1);"
+          onup="set(fov_moveforce, 0);"
+          tooltip="controlBar_dpadzoomOutTip"
+          visible="false"
+          devices="desktop"
+          />
+  <layer name="crosscornerbarzoom_slider_bg"
+          url="%FIRSTXML%/graphics/crosscornerbar/slider_bg_vertical.png"
+          keep="true"
+          align="bottom"
+          alpha="0.2"
+          visible="false"
+          devices="desktop"
+          >
+    <layer name="crosscornerbarzoom_slider_grip"
+           keep="true"
+           url="%FIRSTXML%/graphics/crosscornerbar/slider_grip_vertical.png"
+           align="top"
+           edge="center"
+           ondown="crosscornerbarzoom_slider_grip_ondown();"
+           />
+  </layer>
+
+  <layer name="crosscornerbarbtn_openfs"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_enter_fs.png"
+          onclick="enterFullscreen();"
+          style="crosscornerbarbtn_vertical_style|crosscornerbarbtn_vertical_style_alpha"
+          tooltip="controlBar_dpadopenFsTip"
+          visible="false"
+          devices="fullscreensupport"
+          />
+  <layer name="crosscornerbarbtn_closefs"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_close_fs.png"
+          onclick="exitFullscreen();"
+          style="crosscornerbarbtn_vertical_style|crosscornerbarbtn_vertical_style_alpha"
+          visible="false"
+          tooltip="controlBar_dpadcloseFsTip"
+          devices="fullscreensupport"
+          />
+
+
+  <layer name="crosscornerbarbtn_gyroscope_off"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_gyroscope.png"
+          style="crosscornerbarbtn_vertical_style|crosscornerbarbtn_vertical_style_alpha"
+          onclick="disableGyroscope();"
+          devices="tablet|mobile"
+          visible="false"
+            tooltip="controlBar_dpadgyroOffTip"
+          />
+  <layer name="crosscornerbarbtn_gyroscope_on"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_gyroscope.png"
+          style="crosscornerbarbtn_vertical_style|crosscornerbarbtn_vertical_style_alpha"
+          onclick="enableGyroscope();"
+          devices="tablet|mobile"
+            tooltip="controlBar_dpadgyroOnTip"
+          visible="false"
+          />
+
+  <layer name="crosscornerbarbtn_ctrlmode_move_to"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_move_to.png"
+          style="crosscornerbarbtn_vertical_style|crosscornerbarbtn_vertical_style_alpha"
+          tooltip="controlBar_dpadctrlmodeMoveTip"
+          onclick="setControlModeMoveTo();"
+          visible="false"
+          devices="desktop"
+          />
+  <layer name="crosscornerbarbtn_ctrlmode_drag_to"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_drag_to.png"
+          style="crosscornerbarbtn_vertical_style|crosscornerbarbtn_vertical_style_alpha"
+          tooltip="controlBar_dpadctrlmodeDragTip"
+          onclick="setControlModeDragTo();"
+          visible="false"
+          devices="desktop"
+          />
+
+
+</layer>
+
+  <action name="crosscornerbarvertical_onout_action">
+    set(layer[crosscornerbarmenu_vertical_bg].alpha, 0.2);
+    if (device.fullscreensupport,
+      set(layer[crosscornerbarbtn_openfs].alpha, 0.2);
+      set(layer[crosscornerbarbtn_closefs].alpha, 0.2);
+    );
+    if (device.desktop,
+    set(layer[crosscornerbarbtn_in].alpha, 0.2);
+    set(layer[crosscornerbarbtn_out].alpha, 0.2);
+    set(layer[crosscornerbarzoom_slider_bg].alpha, 0.2);
+    );
+
+
+    set(layer[crosscornerbarbtn_autorotate_off].alpha, 0.2);
+    set(layer[crosscornerbarbtn_autorotate_on ].alpha, 0.2);
+    if (device.desktop,
+      set(layer[crosscornerbarbtn_ctrlmode_drag_to].alpha, 0.2);
+      set(layer[crosscornerbarbtn_ctrlmode_move_to].alpha, 0.2);
+    );
+  </action>
+
+  <action name="crosscornerbarvertical_onover_action">
+    set(layer[crosscornerbarmenu_vertical_bg].alpha, 1);
+    if (device.fullscreensupport,
+      set(layer[crosscornerbarbtn_openfs].alpha, 1);
+      set(layer[crosscornerbarbtn_closefs].alpha, 1);
+    );
+    if (device.desktop,
+    set(layer[crosscornerbarbtn_in].alpha, 1);
+    set(layer[crosscornerbarbtn_out].alpha, 1);
+    set(layer[crosscornerbarzoom_slider_bg].alpha, 1);
+    );
+
+
+    set(layer[crosscornerbarbtn_autorotate_off].alpha, 1);
+    set(layer[crosscornerbarbtn_autorotate_on ].alpha, 1);
+    if (device.desktop,
+      set(layer[crosscornerbarbtn_ctrlmode_drag_to].alpha, 1);
+      set(layer[crosscornerbarbtn_ctrlmode_move_to].alpha, 1);
+    );
+  </action>
+
+  <action name="crosscornerbarhorizontal_onout_action">
+    set(layer[crosscornerbarmenu_horizontal_bg].alpha, 0.2);
+
+
+
+    set(layer[crosscornerbarbtn_sound_on].alpha, 0.2);
+    set(layer[crosscornerbarbtn_sound_off].alpha, 0.2);
+	set(layer[crosscornerbarVolumeBarContainer].alpha, 0.2);
+
+
+ 
+  </action>
+
+  <action name="crosscornerbarhorizontal_onover_action">
+    set(layer[crosscornerbarmenu_horizontal_bg].alpha, 1);
+
+
+
+    set(layer[crosscornerbarbtn_sound_on].alpha, 1);
+    set(layer[crosscornerbarbtn_sound_off].alpha, 1);
+	set(layer[crosscornerbarVolumeBarContainer].alpha, 1);
+
+
+
+  </action>
+
+  <style name="crosscornerbarbtn_horizontal_style"
+         keep="true"
+         align="left"
+         onhover="crosscornerbarshowHorizontalMenuTooltip();"
+         onout="hideTooltip();"
+               crop="0| 0|30|30"
+         onovercrop="0|30|30|30"
+         ondowncrop="0|60|30|30"
+         y="0"
+         />
+<style name="crosscornerbarbtn_horizontal_style_alpha"
+	alpha="1.0"
+	devices="tablet|mobile"
+	/>
+<style name="crosscornerbarbtn_horizontal_style_alpha"
+	alpha="0.2"
+	devices="desktop"
+	/>
+
+  <layer name="crosscornerbarmenu_horizontal_bg"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_bg_horizontal.png"
+          keep="true"
+          align="bottomright"
+          x="118"
+          y="64"
+          edge="right"
+          zorder="0"
+          scale9grid="10|12|40|3"
+          style="crosscornerbarmenu_bg_alpha"
+          visible="false"
+          />
+
+  <layer name="crosscornerbarmenu_horizontal_bg_border"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_bg_border_horizontal.png"
+          keep="true"
+          align="bottomright"
+          x="118"
+          y="64"
+          edge="right"
+          zorder="1"
+          scale9grid="10|12|40|3"
+          onout="crosscornerbarhorizontal_onout_action();"
+          onover="crosscornerbarhorizontal_onover_action();"
+          visible="false"
+          >
+
+  <layer name="crosscornerbarbtn_sound_on"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_start_sound.png"
+          onclick="playTourSounds();"
+          style="crosscornerbarbtn_horizontal_style|crosscornerbarbtn_horizontal_style_alpha"
+          visible="false"
+          tooltip="controlBar_dpadsoundsOnTip"
+          />
+  <layer name="crosscornerbarbtn_sound_off"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_stop_sound.png"
+          onclick="stopTourSounds();"
+          style="crosscornerbarbtn_horizontal_style|crosscornerbarbtn_horizontal_style_alpha"
+          visible="false"
+          tooltip="controlBar_dpadsoundsOffTip"
+          />
+	<layer name="crosscornerbarVolumeBarContainer"
+		type="container"
+		width="48"
+		height="15"
+		keep="true"
+		align="left"
+		x="0"
+		y="0"
+		visible="false"
+		style="crosscornerbarbtn_horizontal_style_alpha"
+		
+		xoffset="0"
+		
+		bgcolor="0x462c72"
+		bgalpha="0.00000001"
+		bgcapture="true"
+		
+		segmentCount="10"
+		segmentWidth="0" 
+		
+		intervalCount="0" 
+		intervalWidth="2"
+		
+		incrementPosX="0"
+		incrementHeight="0"
+		
+		lightColor="0xbafefd"
+		darkColor="0xbafefd"
+		
+		onclick="crosscornerbarVolumeBarClickHandler"
+	/>
+
+
+
+
+
+  </layer>
+
+
+	
+	<style name="crosscornerbarbtn_navigation_style"
+		keep="true"
+		onhover="crosscornerbarshowVerticalMenuTooltip();"
+		onout="hideTooltip();"
+		crop="0|0|30|30"
+		onovercrop="0|30|30|30"
+		ondowncrop="0|60|30|30"
+	/>
+	<style name="crosscornerbarbtn_navigation_style_alpha"
+		alpha="1.0"
+		devices="tablet|mobile"
+	/>
+	<style name="crosscornerbarbtn_navigation_style_alpha"
+		alpha="0.2"
+		devices="desktop"
+	/>
+	
+	<layer name="crosscornerbarnavigation_bg"
+		url="%FIRSTXML%/graphics/crosscornerbar/btn_bg_move.png"
+		align="bottomright"
+		x="10"
+		y="10"
+		keep="true"
+		capture="false"
+		zorder="0"
+		style="crosscornerbarmenu_bg_alpha"
+		visible="false"
+		/>
+
+  <layer name="crosscornerbarnavigation_bg_border"
+          url="%FIRSTXML%/graphics/crosscornerbar/btn_bg_border_move.png"
+          keep="true"
+          align="bottomright"
+          x="10"
+          y="10"
+          capture="false"
+          zorder="1"
+          onout="crosscornerbarnav_onout_action();"
+          onover="crosscornerbarnav_onover_action();"
+          visible="false"
+          >
+    <layer name="crosscornerbarbtn_left"
+            ondown="set(hlookat_moveforce, -1);"
+            onup="set(hlookat_moveforce, 0);"
+            url="%FIRSTXML%/graphics/crosscornerbar/btn_move_left.png"
+            style="crosscornerbarbtn_navigation_style|crosscornerbarbtn_navigation_style_alpha"
+            tooltip="controlBar_dpadmoveLeftTip"
+            x="5"
+            y="0"
+            edge="left"
+            align="left"
+            visible="false"
+             />
+    <layer name="crosscornerbarbtn_right"
+            ondown="set(hlookat_moveforce, +1);"
+            onup="set(hlookat_moveforce, 0);"
+            url="%FIRSTXML%/graphics/crosscornerbar/btn_move_right.png"
+            style="crosscornerbarbtn_navigation_style|crosscornerbarbtn_navigation_style_alpha"
+            tooltip="controlBar_dpadmoveRightTip"
+            x="5"
+            y="0"
+            edge="right"
+            align="right"
+            visible="false"
+             />
+    <layer name="crosscornerbarbtn_up"
+            ondown="set(vlookat_moveforce, -1);"
+            onup="set(vlookat_moveforce, 0);"
+            url="%FIRSTXML%/graphics/crosscornerbar/btn_move_up.png"
+            style="crosscornerbarbtn_navigation_style|crosscornerbarbtn_navigation_style_alpha"
+            tooltip="controlBar_dpadmoveUpTip"
+            x="0"
+            y="5"
+            align="top"
+            edge="top"
+            visible="false"
+             />
+    <layer name="crosscornerbarbtn_down"
+            ondown="set(vlookat_moveforce, +1);"
+            onup="set(vlookat_moveforce, 0);"
+            url="%FIRSTXML%/graphics/crosscornerbar/btn_move_down.png"
+            style="crosscornerbarbtn_navigation_style|crosscornerbarbtn_navigation_style_alpha"
+            tooltip="controlBar_dpadmoveDownTip"
+            x="0"
+            y="5"
+            edge="bottom"
+            align="bottom"
+            visible="false"
+             />
+
+	<layer name="crosscornerbarbtn_hidecontrols"
+		url="%FIRSTXML%/graphics/crosscornerbar/btn_hide_controls.png"
+		style="crosscornerbarbtn_navigation_style"
+		onclick="hideTourControls();"
+		edge="center"
+		align="center"
+		tooltip="controlBar_dpadhideControlsTip"
+		visible="false"
+		alpha="1.0"
+		/>
+	<layer name="crosscornerbarbtn_showcontrols"
+		onclick="showTourControls();"
+		url="%FIRSTXML%/graphics/crosscornerbar/btn_show_controls.png"
+		style="crosscornerbarbtn_navigation_style"
+		align="center"
+		edge="center"
+		visible="false"
+		alpha="0.5"
+		onout="set(alpha, 0.5);"
+		onover="set(alpha, 1);"
+		tooltip="controlBar_dpaddisplayControlsTip"
+		/>
+	
+</layer>
+
+
+  <action name="crosscornerbarnav_onout_action">
+    set(layer[crosscornerbarnavigation_bg].alpha, 0.2);
+    set(layer[crosscornerbarbtn_left].alpha, 0.2);
+    set(layer[crosscornerbarbtn_right].alpha, 0.2);
+    set(layer[crosscornerbarbtn_up].alpha, 0.2);
+    set(layer[crosscornerbarbtn_down].alpha, 0.2);
+  </action>
+
+  <action name="crosscornerbarnav_onover_action">
+    set(layer[crosscornerbarnavigation_bg].alpha, 1);
+    set(layer[crosscornerbarbtn_left].alpha, 1);
+    set(layer[crosscornerbarbtn_right].alpha, 1);
+    set(layer[crosscornerbarbtn_up].alpha, 1);
+    set(layer[crosscornerbarbtn_down].alpha, 1);
+  </action>
+
+
+	<events name="crosscornerbarplaystopsoundsevent" playtoursoundsevent="crosscornerbarupdateSoundButtons();" stoptoursoundsevent="crosscornerbarupdateSoundButtons();" keep="true"/>
+	<action name="crosscornerbarHideSoundButtons">
+		set(layer[crosscornerbarbtn_sound_off].visible, false);
+		set(layer[crosscornerbarbtn_sound_on].visible , false);
+		set(layer[crosscornerbarVolumeBarContainer].visible, false);
+	</action>
+	<action name="crosscornerbarShowSoundButtons">
+		if (tour_soundson == false,
+			set(layer[crosscornerbarbtn_sound_off].visible, false);
+			set(layer[crosscornerbarbtn_sound_on].visible , true);
+			set(layer[crosscornerbarVolumeBarContainer].visible, true);
+			crosscornerbarAdjustHighlightToVolume(0);
+		,
+			set(layer[crosscornerbarbtn_sound_off].visible, true);
+			set(layer[crosscornerbarbtn_sound_on].visible , false);
+			set(layer[crosscornerbarVolumeBarContainer].visible, true);
+			crosscornerbarAdjustHighlightToVolume(get(tour_soundsvolume));
+		);
+	</action>
+	<action name="crosscornerbarupdateSoundButtons">
+		if (tour_displaycontrols,
+			crosscornerbarShowSoundButtons();
+		,
+			crosscornerbarHideSoundButtons();
+		);
+	</action>
+
+
+	<events name="crosscornerbarAutorotationEvents"
+		onstartautorotation="crosscornerbarupdateAutorotationButtons();"
+		onresumeautorotation="crosscornerbarupdateAutorotationButtons();"
+		onstopautorotation="crosscornerbarupdateAutorotationButtons();"
+		onpauseautorotation="crosscornerbarupdateAutorotationButtons();"
+		keep="true"/>
+	<action name="crosscornerbarHideAutorotationButtons">
+		set(layer[crosscornerbarbtn_autorotate_off].visible, false);
+		set(layer[crosscornerbarbtn_autorotate_on].visible , false);
+	</action>
+	<action name="crosscornerbarShowAutorotationButtons">
+		if(tour_autorotateenabled==false,
+			set(layer[crosscornerbarbtn_autorotate_off].visible, false);
+			set(layer[crosscornerbarbtn_autorotate_on].visible , true);
+		,
+			set(layer[crosscornerbarbtn_autorotate_off].visible, true);
+			set(layer[crosscornerbarbtn_autorotate_on].visible , false);
+		);
+	</action>
+	<action name="crosscornerbarupdateAutorotationButtons">
+		if (tour_displaycontrols,
+			crosscornerbarShowAutorotationButtons();
+		,
+			crosscornerbarHideAutorotationButtons();
+		);
+	</action>
+
+
+
+	<events name="crosscornerbarcontrolmodechangedevent" oncontrolmodechanged="if (crosscornerbarControlModeButtonsActivated,crosscornerbarupdateControlModeButtons(););" onxmlcomplete="set(crosscornerbarControlModeButtonsActivated, true);" keep="true"/>
+	<action name="crosscornerbarHideControlModeButtons">
+		set(layer[crosscornerbarbtn_ctrlmode_move_to].visible, false);
+		set(layer[crosscornerbarbtn_ctrlmode_drag_to].visible, false);
+	</action>
+	<action name="crosscornerbarShowControlModeButtons">
+		if (tour_controlmodemousetype == "moveto",
+			set(layer[crosscornerbarbtn_ctrlmode_drag_to].visible, true);
+			set(layer[crosscornerbarbtn_ctrlmode_move_to].visible, false);
+		,
+			set(layer[crosscornerbarbtn_ctrlmode_move_to].visible, true);
+			set(layer[crosscornerbarbtn_ctrlmode_drag_to].visible, false);
+		);
+	</action>
+	<action name="crosscornerbarupdateControlModeButtons">
+	if (device.desktop,
+		if (tour_displaycontrols,
+			crosscornerbarShowControlModeButtons();
+		,
+			crosscornerbarHideControlModeButtons();
+		);
+	,
+		crosscornerbarHideControlModeButtons();
+	);
+	</action>
+	
+  <action name="crosscornerbarzoom_slider_grip_dragging">
+    if (pressed,
+      sub(dy, mouse.stagey, drag_stagey); 
+      add(newy, drag_currenty, dy); 
+
+      if(newy LT 0, set(newy, 0) );
+      if(newy GT layer[crosscornerbarzoom_slider_bg].pixelheight, copy(newy, layer[crosscornerbarzoom_slider_bg].pixelheight));
+      copy(y, newy);
+
+      div(val, newy, layer[crosscornerbarzoom_slider_bg].pixelheight);
+
+      sub(fovrange, view.fovmax, view.fovmin);
+      mul(newfov  , val, fovrange);
+      add(newfov  , view.fovmin);
+      set(view.fov, get(newfov));
+
+      delayedcall(0, crosscornerbarzoom_slider_grip_dragging());
+    );
+  </action>
+  <action name="crosscornerbarzoom_slider_grip_ondown">
+    copy(drag_currenty, y);
+    copy(drag_stagey, mouse.stagey);
+    crosscornerbarzoom_slider_grip_dragging();
+  </action>
+  <events name="crosscornerbarzoom_slider_events" keep="true" onviewchanged="crosscornerbarzoom_slider_update();" />
+  <action name="crosscornerbarzoom_slider_update">
+    if (device.desktop,
+    ifnot (layer[crosscornerbarzoom_slider_grip].pressed,
+      sub(val, view.fov, view.fovmin);
+      sub(fovrange, view.fovmax, view.fovmin);
+      div(val, fovrange);
+      mul(newy, val, layer[crosscornerbarzoom_slider_bg].pixelheight);
+      set(layer[crosscornerbarzoom_slider_grip].y, get(newy));
+    );
+    );
+  </action>
+
+	<events name="crosscornerbarmenufullscreenchangeevent"
+		onenterfullscreen="crosscornerbarupdateFullscreenButtons();"
+		onexitfullscreen="crosscornerbarupdateFullscreenButtons();"
+		keep="true"/>
+	<action name="crosscornerbarHideFullscreenButtons">
+		set(layer[crosscornerbarbtn_openfs].visible , false);
+		set(layer[crosscornerbarbtn_closefs].visible, false);
+	</action>
+	<action name="crosscornerbarShowFullscreenButtons">
+		if (device.fullscreensupport,
+			if(tour_fullscreen,
+				set(layer[crosscornerbarbtn_openfs].visible , false);
+				set(layer[crosscornerbarbtn_closefs].visible, true);
+			,
+				set(layer[crosscornerbarbtn_openfs].visible ,true);
+				set(layer[crosscornerbarbtn_closefs].visible,false);
+			);
+		,
+			crosscornerbarHideFullscreenButtons();
+		);
+	</action>
+	<action name="crosscornerbarupdateFullscreenButtons">
+		if (tour_displaycontrols,
+			crosscornerbarShowFullscreenButtons();
+		,
+			crosscornerbarHideFullscreenButtons();
+		);
+	</action>
+	
+
+  <events name="crosscornerbarbtngyroscopeavailableevents"
+          ongyroscopeavailable="crosscornerbarupdateGyroscopeButtonsAvailability();"
+          ongyroscopeon="crosscornerbarenableGyroscopeButtons(true);"
+          ongyroscopeoff="crosscornerbarenableGyroscopeButtons(false);"
+          keep="true"/>
+  <krpano crosscornerbarmenugyroscopeavailable="false"
+          crosscornerbarmenugyroscopeenabled="false"/>
+  <action name="crosscornerbarupdateGyroscopeButtonsAvailability">
+    if (tour_gyroscopedevices,
+      set(crosscornerbarmenugyroscopeavailable, true);
+      crosscornerbarupdateGyroscopeButtons();
+    );
+  </action>
+  <action name="crosscornerbarenableGyroscopeButtons">
+    if (tour_gyroscopedevices,
+      set(crosscornerbarmenugyroscopeenabled, %1);
+      crosscornerbarupdateGyroscopeButtons();
+    );
+  </action>
+	<action name="crosscornerbarHideGyroscopeButtons">
+		set(layer[crosscornerbarbtn_gyroscope_off].visible, false);
+		set(layer[crosscornerbarbtn_gyroscope_on].visible, false);
+	</action>
+	<action name="crosscornerbarShowGyroscopeButtons">
+		if (crosscornerbarmenugyroscopeavailable,
+			if (crosscornerbarmenugyroscopeenabled,
+				set(layer[crosscornerbarbtn_gyroscope_off].visible, false);
+				set(layer[crosscornerbarbtn_gyroscope_on].visible, true);
+			,
+				set(layer[crosscornerbarbtn_gyroscope_off].visible, true);
+				set(layer[crosscornerbarbtn_gyroscope_on].visible, false);
+			);
+		,
+			crosscornerbarHideGyroscopeButtons();
+		);
+	</action>
+	<action name="crosscornerbarupdateGyroscopeButtons">
+	if (tour_gyroscopedevices,
+		if (tour_displaycontrols,
+			crosscornerbarShowGyroscopeButtons();
+		,
+			crosscornerbarHideGyroscopeButtons();
+		);
+	,
+		crosscornerbarHideGyroscopeButtons();
+	);
+	</action>
+	
+
+	<events name="crosscornerbarmenuhideshowcontrolsevent"
+		hidetourcontrols="crosscornerbarhideMenuControls();"
+		showtourcontrols="crosscornerbarshowMenuControls();"
+		keep="true"/>
+	
+
+<action name="crosscornerbarhideMenuControls">
+		set(crosscornerbarIsOpened, false);
+		set(layer[crosscornerbarnavigation_bg].visible, false);
+		
+			set(layer[crosscornerbarbtn_up].visible, false);
+			set(layer[crosscornerbarbtn_down].visible, false);
+			set(layer[crosscornerbarbtn_left].visible, false);
+			set(layer[crosscornerbarbtn_right].visible, false);
+		
+		set(layer[crosscornerbarnavigation_bg_border].visible, true);
+		tween(layer[crosscornerbarnavigation_bg_border].alpha, 0.5, 1);
+		
+		
+		if(crosscornerbarverticalheight != 0,
+			set(layer[crosscornerbarmenu_vertical_bg].visible, false);
+				set(layer[crosscornerbarbtn_in].visible, false);
+				set(layer[crosscornerbarbtn_out].visible, false);
+					set(layer[crosscornerbarzoom_slider_bg].visible, false);
+
+				crosscornerbarupdateGyroscopeButtons();
+
+				crosscornerbarupdateAutorotationButtons();
+
+
+				crosscornerbarupdateFullscreenButtons();
+				crosscornerbarupdateControlModeButtons();
+			tween(layer[crosscornerbarmenu_vertical_bg_border].alpha , 0, 1);
+			tween(layer[crosscornerbarmenu_vertical_bg_border].height , 0, 1, easeOutQuad, set(layer[crosscornerbarmenu_vertical_bg_border].visible, false));
+		);
+		
+		
+		if(crosscornerbarhorizontalwidth != 0,
+			set(layer[crosscornerbarmenu_horizontal_bg].visible, false);
+
+
+
+				crosscornerbarupdateSoundButtons();
+
+
+
+			tween(layer[crosscornerbarmenu_horizontal_bg_border].alpha , 0, 1);
+			tween(layer[crosscornerbarmenu_horizontal_bg_border].width, 0, 1, easeOutQuad, set(layer[crosscornerbarmenu_horizontal_bg_border].visible, false));
+		);
+		set(layer[crosscornerbarbtn_showcontrols].visible, true);
+		set(layer[crosscornerbarbtn_hidecontrols].visible, false);
+	</action>
+	
+	<action name="crosscornerbarshowMenuControls">
+	set(crosscornerbarIsOpened, true);
+    set(layer[crosscornerbarbtn_showcontrols].visible, false);
+    set(layer[crosscornerbarbtn_hidecontrols].visible, true);
+    set(layer[crosscornerbarnavigation_bg].visible, true);
+
+    set(layer[crosscornerbarbtn_up].visible, true);
+    set(layer[crosscornerbarbtn_down].visible, true);
+    set(layer[crosscornerbarbtn_left].visible, true);
+    set(layer[crosscornerbarbtn_right].visible, true);
+
+    set(layer[crosscornerbarnavigation_bg_border].visible, true);
+    tween(layer[crosscornerbarnavigation_bg_border].alpha, 1, 1);
+
+    
+    if(crosscornerbarverticalheight != 0,
+      set(layer[crosscornerbarmenu_vertical_bg_border].visible, true);
+      tween(layer[crosscornerbarmenu_vertical_bg_border].alpha, 1, 1);
+      tween(layer[crosscornerbarmenu_vertical_bg_border].height, get(crosscornerbarverticalheight), 1, easeOutQuad,
+        set(layer[crosscornerbarmenu_vertical_bg].visible, true);
+        crosscornerbarupdateFullscreenButtons();
+        crosscornerbarupdateAutorotationButtons();
+
+
+        if (device.desktop,
+        set(layer[crosscornerbarbtn_in].visible, true);
+        set(layer[crosscornerbarbtn_out].visible, true);
+        set(layer[crosscornerbarzoom_slider_bg].visible, true);
+        );
+
+        crosscornerbarupdateGyroscopeButtons();
+
+      );
+    );
+
+    
+    if(crosscornerbarhorizontalwidth != 0,
+      set(layer[crosscornerbarmenu_horizontal_bg_border].visible, true);
+      tween(layer[crosscornerbarmenu_horizontal_bg_border].alpha, 1, 1);
+      tween(layer[crosscornerbarmenu_horizontal_bg_border].width, get(crosscornerbarhorizontalwidth), 1, easeOutQuad,
+        set(layer[crosscornerbarmenu_horizontal_bg].visible, true);
+
+
+        crosscornerbarupdateControlModeButtons();
+
+        crosscornerbarupdateSoundButtons();
+
+
+
+
+
+      );
+    );
+  </action>
+
+
+
+  <action name="crosscornerbarshowHorizontalMenuTooltip">
+    if (tooltip !== null, showTooltip(bottomright, crosscornerbarhorizMenuTooltipStyle, bottom););
+  </action>
+  <action name="crosscornerbarshowVerticalMenuTooltip">
+    if (tooltip !== null, showTooltip(bottomright, crosscornerbarverticalMenuTooltipStyle, right););
+  </action>
+
+  <textstyle name="crosscornerbarhorizMenuTooltipStyle"
+             font="Times New Roman"
+             fontsize="14"
+             bold="true"
+             italic="false"
+             textcolor="0x000000"
+             background="true"
+             backgroundcolor="0x462c72"
+             alpha="0.8"
+             blendmode="normal"
+		     effect="glow(0x462c72,1,10,100); "
+             origin="cursor"
+             textalign="center"
+             border="0"
+             xoffset="0"
+             edge="bottom"
+             yoffset="-25"
+             devices="flash"
+             noclip="true"/>
+
+  <textstyle name="crosscornerbarverticalMenuTooltipStyle"
+             font="Times New Roman"
+             fontsize="14"
+             bold="true"
+             italic="false"
+             textcolor="0x000000"
+             background="true"
+             backgroundcolor="0x462c72"
+             alpha="0.8"
+             blendmode="normal"
+		     effect="glow(0x462c72,1,10,100); "
+             origin="cursor"
+             edge="right"
+             textalign="right"
+             xoffset="-25"
+             border="0"
+             yoffset="0"
+             devices="flash"
+             noclip="true"/>
+
+  <layer name="crosscornerbarhorizMenuTooltipStyle"
+	     keep="true"
+	     enabled="false"
+	     capture="false"
+	     url="%FIRSTXML%/graphics/textfield.swf"
+	     align="center"
+	     background="true"
+	     backgroundcolor="0x462c72"
+	     border="true"
+	     bordercolor="0x462c72"
+	     css="color:#000000;font-family:Times New Roman;font-weight:bold;font-size:14px;text-align:center;"
+	     width="200"
+	     height="20"
+	     autoheight="true"
+         edge="bottom"
+	     yoffset="-25"
+	     xoffset="0"
+	     selectable="false"
+	     zorder="0"
+	     visible="false"
+	     html=""
+	     devices="html5"
+         />
+  <layer name="crosscornerbarverticalMenuTooltipStyle"
+	     keep="true"
+	     enabled="false"
+	     capture="false"
+	     url="%FIRSTXML%/graphics/textfield.swf"
+	     align="center"
+	     background="true"
+	     backgroundcolor="0x462c72"
+	     border="true"
+	     bordercolor="0x462c72"
+	     css="color:#000000;font-family:Times New Roman;font-weight:bold;font-size:14px;text-align:center;"
+	     width="200"
+	     height="20"
+	     autoheight="true"
+         edge="right"
+	     xoffset="-25"
+	     yoffset="0"
+	     selectable="false"
+	     zorder="0"
+	     visible="false"
+	     html=""
+	     devices="html5"
+         />
+
+
+
+
+
+
+<!-- ************ -->
+<!-- Double click -->
+<!-- ************ -->
+  <plugin name="doubleclick" url="%FIRSTXML%/graphics/doubleclick/fieldofview_dc.swf" alturl="%FIRSTXML%/graphics/doubleclick/fieldofview_dc.js" keep="true" ondblclick="ondoubleclick();"/>
+  <action name="ondoubleclick">switchFullscreen();
+
+  </action>
+  <!-- ************************* -->
+  <!-- Progress Bar and Loopings -->
+  <!-- ************************* -->
+  <progress showload="bar(
+                center
+
+                ,
+				200,
+                10,
+				0,
+                50,
+				shaded,
+				0x000000,0xdddddd,0xdddddd,
+				0x111111,0,
+				0xffffff,0
+				)"
+			showwait="loopings(
+				0xffffff,
+				15,15,
+				0,0,
+				0xffffff,8,
+				0,0,center
+				)"
+			showreloads="false"
+			parent=""
+			/>
+  <!-- ***************** -->
+  <!-- Small Gallery Bar -->
+  <!-- Based on krpano imagegallery sample, a krpano xml controlled thumbnails image bar -->
+  <!-- ***************** -->
+
+  <krpano smallgallerybarbuilt="false" smallgallerybarBuildable="false" />
+  <events name="smallgallerybarevents"
+          onxmlcomplete="smallgallerybarbuildBar();"
+          keep="true"/>
+  <action name="smallgallerybarbuildBar">
+    ifnot (smallgallerybarbuilt,
+      set(smallgallerybarBuildable, true);
+      smallgallerybarthumbbar_addimage(0,%FIRSTXML%/graphics/smallgallerybar/img_648188.jpg);
+      set(smallgallerybarBuildable, true);
+      smallgallerybarthumbbar_addimage(1,%FIRSTXML%/graphics/smallgallerybar/img_648288.jpg);
+      set(smallgallerybarBuildable, true);
+      smallgallerybarthumbbar_addimage(2,%FIRSTXML%/graphics/smallgallerybar/img_650288.jpg);
+      set(smallgallerybarBuildable, true);
+      smallgallerybarthumbbar_addimage(3,%FIRSTXML%/graphics/smallgallerybar/img_648988.jpg);
+      set(smallgallerybarBuildable, true);
+      smallgallerybarthumbbar_addimage(4,%FIRSTXML%/graphics/smallgallerybar/img_651188.jpg);
+      set(smallgallerybarBuildable, true);
+      smallgallerybarthumbbar_addimage(5,%FIRSTXML%/graphics/smallgallerybar/bsyq-cohfty.jpg);
+      set(smallgallerybarBuildable, true);
+      smallgallerybarthumbbar_addimage(6,%FIRSTXML%/graphics/smallgallerybar/dg1ex2uz6su.jpg);
+      set(smallgallerybarbuilt, true);
+      
+    );
+  </action>
+
+  <events name="smallgallerybarStartEvents" onTourStart="showsmallgallerybar();" keep="true" />
+
+
+
+  <layer name="smallgallerybarbackground" type="container" keep="true"
+         bgcolor="0xffffff"
+         bgalpha="0.2"
+         alpha="1.0"
+         align="left"
+         x="10"
+         y="0"
+         zorder="4"
+         visible="false"
+         height="508"
+         width="112"
+         />
+
+  <action name="showsmallgallerybar">
+    if(smallgallerybarBuildable,
+    smallgallerybarthumbbar_set_visible(true);
+    );
+  </action>
+
+
+  <action name="smallgallerybarthumbbar_addimage">
+    txtadd(pname, 'smallgallerybarPicture', %1);
+    addplugin(get(pname));
+    set(layer[%pname].zorder, 5);
+    set(layer[%pname].url, %2);
+    set(layer[%pname].align, left);
+    set(layer[%pname].width, 90);
+    set(layer[%pname].height, 60);
+    set(layer[%pname].onclick, smallgallerybar_showimage(get(name)));
+    set(layer[%pname].visible, false);
+    set(layer[%pname].keep, true);
+
+    
+    set(layer[%pname].x, 21);
+
+    mul(tmp, 71, %1);
+    add(tmp, tmp, 5);
+    add(layer[%pname].y, 0, tmp );
+
+      sub(layer[%pname].y, layer[%pname].y, 218);
+
+    copy(layer[%pname].thumbx, layer[%pname].x);
+    copy(layer[%pname].thumby, layer[%pname].y);
+  </action>
+
+  <action name="smallgallerybar_showimage">
+    smallgallerybar_hide_allimages();
+
+    set(layer[%1].zorder, 6);
+
+    push(layer[%1].width);
+    push(layer[%1].height);
+    layer[%1].resetsize();
+    copy(layer[%1].originalwidth , layer[%1].width);
+    copy(layer[%1].originalheight, layer[%1].height);
+    pop(layer[%1].height);
+    pop(layer[%1].width);
+
+    set(imgwidth , get(layer[%1].originalwidth));
+    set(imgheight, get(layer[%1].originalheight));
+
+    set(maxwidth, get(stagewidth));
+    sub(maxwidth, get(stagewidth), 266);
+
+    set(maxheight, get(stageheight));
+    sub(maxheight, get(stageheight), 22);
+
+    if(imgwidth GT maxwidth,
+      mul(imgheight, imgheight, maxwidth);
+      div(imgheight, imgheight, imgwidth);
+      copy(imgwidth, maxwidth);
+    );
+
+    if(imgheight GT maxheight,
+      mul(imgwidth, imgwidth, maxheight);
+      div(imgwidth, imgwidth, imgheight);
+      copy(imgheight, maxheight);
+    );
+
+    tween(layer[%1].width , get(imgwidth));
+    tween(layer[%1].height, get(imgheight));
+
+    layer[%1].changeorigin(center,center);
+
+    tween(layer[%1].x, 0);
+    tween(layer[%1].y, 0);
+
+    set(layer[%1].onclick, smallgallerybar_hideimage(%1) );
+  </action>
+
+  <action name="smallgallerybar_hideimage">
+    layer[%1].changeorigin(left,left);
+
+    set(layer[%1].zorder, 5);
+
+    tween(layer[%1].width , 90);
+    tween(layer[%1].height, 60);
+    tween(layer[%1].x, get(layer[%1].thumbx));
+    tween(layer[%1].y, get(layer[%1].thumby));
+
+    set(layer[%1].onclick, smallgallerybar_showimage(%1) );
+  </action>
+
+  <action name="smallgallerybar_hide_allimages">
+    smallgallerybar_hideimage(smallgallerybarPicture0);
+    smallgallerybar_hideimage(smallgallerybarPicture1);
+    smallgallerybar_hideimage(smallgallerybarPicture2);
+    smallgallerybar_hideimage(smallgallerybarPicture3);
+    smallgallerybar_hideimage(smallgallerybarPicture4);
+    smallgallerybar_hideimage(smallgallerybarPicture5);
+    smallgallerybar_hideimage(smallgallerybarPicture6);
+  </action>
+
+  <action name="smallgallerybarthumbbar_set_visible">
+    set(layer[smallgallerybarPicture0].visible,%1);
+    set(layer[smallgallerybarPicture1].visible,%1);
+    set(layer[smallgallerybarPicture2].visible,%1);
+    set(layer[smallgallerybarPicture3].visible,%1);
+    set(layer[smallgallerybarPicture4].visible,%1);
+    set(layer[smallgallerybarPicture5].visible,%1);
+    set(layer[smallgallerybarPicture6].visible,%1);
+    set(layer[smallgallerybarbackground].visible, %1);
+  </action>
+
+  <!-- ************ -->
+  <!-- Logo : viewport / topright -->
+  <!-- ************ -->
+
+
+  <layer align="topright"
+         x="10"
+         y="10"
+         zorder="7"
+         name="logo"
+         keep="true"
+         visible="false"
+         capture="false"
+		
+			tooltip="logotooltipText"
+			onhover="showTooltip(topright);"
+			onout="hideTooltip();"
+         url="%FIRSTXML%/graphics/logo/_1086.jpg" 
+         onclick="openurl(http://vk.com/konfetti_kids,_blank);"
+
+
+         />
+
+  <events name="logoevents" 
+    onTourStart="showlogo();"
+    keep="true" />
+
+  <action name="hidelogo">
+    set(layer[logo].visible, false);
+  </action>
+  <action name="showlogo">
+      set(layer[logo].visible, true);
+  </action>
+
+
+
+
+
+  <!-- Hide / Show Controls -->
+  <action name="hideTourControls">set(tour_displaycontrols, false);events.dispatch(hidetourcontrols);</action>
+  <action name="showTourControls">set(tour_displaycontrols, true); events.dispatch(showtourcontrols);</action>
+  <!-- Sounds Management -->
+  <plugin name="soundinterface"
+          preload="true"
+          url="%SWFPATH%/graphics/soundinterface.swf"
+          alturl="%FIRSTXML%/graphics/soundinterface.js"
+          rootpath="%FIRSTXML%/sounds"
+          backgroundsound=""
+          backgroundsoundloops="0"
+          bgsound="false"
+          volumeinitialized="false"
+          keep="true"/>
+  <events name="soundmanagementevents"
+          onnewpano="playbackgroundsound();"
+          onxmlcomplete="soundinterfaceonxmlcomplete();"
+          keep="true"/>
+  <action name="soundinterfaceonxmlcomplete">
+    ifnot(plugin[soundinterface].volumeinitialized,
+      div(plugin[soundinterface].volume, tour_soundsvolume, 100);
+      set(plugin[soundinterface].volumeinitialized,true);
+    );
+  </action>
+  <action name="playsound3Dwhenpossible">
+    set(really_play_sound, true);
+    if (tour_current_played_sound,
+      if (%1 == tour_current_played_sound,
+        stopsound(%1);
+        delete(tour_current_played_sound);
+        set(really_play_sound, false);
+      );
+    );
+    if (really_play_sound,
+      if (tour_current_played_sound,
+        stopsound(get(tour_current_played_sound));
+      );
+      if (%3,
+        if (device.flash,
+          playsound3D(%1,%2,%4,%5);
+        ,
+          playsound(%1,%2);
+        );
+      , 
+        playsound(%1,%2);
+      );
+      set(tour_current_played_sound, %1);
+    );
+  </action>
+  <action name="playbackgroundsound">
+    if (xml.scene,
+      if (scene[get(xml.scene)].backgroundsound,
+        if (plugin[soundinterface].backgroundsound != scene[get(xml.scene)].backgroundsound,
+          copy(plugin[soundinterface].backgroundsound     , scene[get(xml.scene)].backgroundsound);
+          copy(plugin[soundinterface].backgroundsoundloops, scene[get(xml.scene)].backgroundsoundloops);
+          if (tour_soundson == true,
+            playsound(bgsoundname, get(plugin[soundinterface].backgroundsound), get(plugin[soundinterface].backgroundsoundloops));
+            set(plugin[soundinterface].bgsound, true);
+           ,
+            set(plugin[soundinterface].bgsound, false);
+          );
+        );
+      );
+    );
+  </action>
+  <action name="resetbackgroundsoundifneeded">
+    if (xml.scene,
+      if (scene[get(xml.scene)].backgroundsound != scene[%1].backgroundsound,
+        if (plugin[soundinterface].backgroundsound,
+          if (plugin[soundinterface].bgsound,
+            stopsound(bgsoundname);
+          );
+        );
+        set(plugin[soundinterface].backgroundsound     , "");
+        set(plugin[soundinterface].backgroundsoundloops, 0);
+        set(plugin[soundinterface].bgsound             , false);
+      );
+    );
+  </action>
+  <action name="pausebackgroundsound">
+    if (plugin[soundinterface].backgroundsound,
+      if (plugin[soundinterface].bgsound,
+        pausesound(bgsoundname);
+      );
+    );
+  </action>
+  <action name="resumebackgroundsound">
+    if (tour_soundson == true,
+      if (plugin[soundinterface].backgroundsound,
+        if (plugin[soundinterface].bgsound,
+          resumesound(bgsoundname);
+         ,
+          playsound(bgsoundname, get(plugin[soundinterface].backgroundsound), get(plugin[soundinterface].backgroundsoundloops));
+          set(plugin[soundinterface].bgsound, true);
+        );
+      );
+    );
+  </action>
+  <action name="preloadSounds">
+    preloadsound("_10861085_music.mp3");
+  </action>
+  <action name="play3DLocalSounds">
+    if (xml.scene, if (scene[get(xml.scene)].haslocalsounds, playpanolocalsounds();););
+  </action>
+  <action name="stop3DLocalSounds">
+    if (xml.scene, if (scene[get(xml.scene)].haslocalsounds, stoppanolocalsounds();););
+  </action>
+  <action name="set3DLocalSoundsVolume">
+    if (xml.scene, if (scene[get(xml.scene)].haslocalsounds, setpanolocalsoundsvolume();););
+  </action>
+  <action name="playTourSounds">
+    set(tour_soundson, true);events.dispatch(playtoursoundsevent);
+    play3DLocalSounds();
+    resumebackgroundsound();
+  </action>
+  <action name="stopTourSounds">
+    set(tour_soundson, false);events.dispatch(stoptoursoundsevent);
+    stop3DLocalSounds();
+    if (tour_current_played_sound,
+      stopsound(get(tour_current_played_sound));
+      delete(tour_current_played_sound);
+    );
+    pausebackgroundsound();
+  </action>
+  <action name="setTourSoundsVolume">
+    set(tour_soundsvolume, %1);
+    div(volume, tour_soundsvolume, 100);
+    set(plugin[soundinterface].volume, get(volume));
+    set3DLocalSoundsVolume();
+  </action>
+  <!-- Fullscreen Management -->
+  <action name="exitFullScreen" devices="fullscreensupport">set(tour_fullscreen,false);set(fullscreen,false);</action>
+  <action name="enterFullScreen" devices="fullscreensupport">set(tour_fullscreen,true);set(fullscreen,true);</action>
+  <action name="switchFullScreen">if(tour_fullscreen,exitFullScreen();,enterFullScreen(););</action>
+
+  
+  <events name="krpanoExitFullscreenEvent"
+    onexitfullscreen="if(tour_fullscreen,exitFullScreenChangeEvent(););"
+    keep="true" />
+
+  <action name="exitFullScreenChangeEvent" devices="fullscreensupport">set(tour_fullscreen,false);events.dispatch(onexitfullscreen);</action>
+  <action name="enableGyroscope">
+    changeGyroscopeState();
+  </action>
+  <action name="disableGyroscope">
+    changeGyroscopeState();
+  </action>
+</krpano>

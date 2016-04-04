@@ -1,0 +1,138 @@
+/*
+ Theme Name:   Sydney Child
+ Theme URI:    https://smartcatdesign.net/articles/athena-responsive-multipurpose-wordpress-theme/
+ Description:  Sydney Child Theme
+ Author:       Olga Kuvshinova
+ Author URI:   http://lolga.org
+ Template:     sydney
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:        black, blue, green, pink, red, yellow, dark, light, full-width-template, threaded-comments, responsive-layout, left-sidebar, featured-images, right-sidebar, one-column, two-columns, three-columns, custom-colors, theme-options, translation-ready, photoblogging
+ Text Domain:  sydney
+*/
+
+@import url("../sydney/style.css");
+
+ul.packages-1 {
+	list-style: none;
+	display: inline-flex;
+}
+
+ul.packages-2 {
+	list-style: none;
+	display: inline-flex;
+}
+
+li.pck {
+	padding: 4%;
+    width: 500px;
+}
+
+iframe {
+	float: right;
+}
+
+#primary {
+	width: 100%;
+}
+
+div.text-cont {
+	margin-bottom: 20%;
+}
+
+#ninja_forms_field_1_div_wrap {
+    width: 48%;
+    display: inline-block;
+    
+}
+
+
+#ninja_forms_field_2_div_wrap {
+	width: 48%;
+    display: inline-block;
+    float: right;
+
+}
+
+#ninja_forms_field_3_div_wrap {
+    width: 100%;
+
+}
+
+
+#nf_submit_1 {
+	float: right;
+}
+
+#nf_submit_1 {
+	font-weight: 20px;
+}
+/*#post-26 h1 {
+	color: white;
+}
+
+#post-92 h1 {
+	color: white;
+}*/
+.page-wrap {
+	padding: 0 0 0 0;
+}
+
+.page-wrap {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.roll-button {
+	font-size: 26px;
+}
+
+table.price {
+	border: 1px solid #90d4c5;
+	border-color: #90d4c5;
+	margin-bottom: 3%;
+}
+
+table {
+	border: 1px solid #90d4c5;
+
+}
+
+#mainnav .sub-menu li a {
+		color: #fff;
+		display: block;
+		line-height: 30px;
+		background: #90d4c5;
+		font-family: "Lobster";
+		padding: 0 18px;
+		border-top: 1px solid #252525;
+	    -webkit-transition: all 0.3s ease;
+	       -moz-transition: all 0.3s ease;
+	        -ms-transition: all 0.3s ease;
+	         -o-transition: all 0.3s ease;
+	            transition: all 0.3s ease;
+	        }
+
+	        #mainnav ul li::before {
+		font-family: "Lobster";
+		color: #fff;
+		float: left;
+		margin: 5px 5px 0 0;
+		font-size: 14px;
+		line-height: 1;
+		font-weight: 400;
+	}
+
+	.btn-submenu {
+		position: absolute;
+		right: 20px;
+		top: 0;
+		font-family: "Lobster";
+		font-size: 20px;
+		line-height: 45px;
+		text-align: center;
+		cursor: pointer;
+		width: 70px;
+		height: 44px;
+	}

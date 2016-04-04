@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<krpano>
+
+<!-- ************************ -->
+<!--         Messages         -->
+<!-- ************************ -->
+
+  <data name="en_project_title"><![CDATA[New Project]]></data>
+
+
+
+  <data name="en_pano20_title"><![CDATA[IMG_6445 Panorama]]></data>
+  <data name="en_spotpoint28_tooltip"><![CDATA[Вход в "Конфетти"]]></data>
+
+
+  <data name="en_pano21_title"><![CDATA[IMG_6464 Panorama]]></data>
+  <data name="en_spotpoint29_tooltip"><![CDATA[Выход на улицу]]></data>
+  <data name="en_spotpoint30_tooltip"><![CDATA[Туалет]]></data>
+
+
+  <data name="en_pano22_title"><![CDATA[IMG_6471 Panorama]]></data>
+  <data name="en_spotpoint31_tooltip"><![CDATA[Комната праздника]]></data>
+
+
+
+
+
+
+  <data name="en_controlBar_dpadzoomInTip"><![CDATA[Zoom in]]></data>
+  <data name="en_controlBar_dpadzoomOutTip"><![CDATA[Zoom out]]></data>
+  <data name="en_controlBar_dpadmoveLeftTip"><![CDATA[Move left]]></data>
+  <data name="en_controlBar_dpadmoveRightTip"><![CDATA[Move right]]></data>
+  <data name="en_controlBar_dpadmoveUpTip"><![CDATA[Move up]]></data>
+  <data name="en_controlBar_dpadmoveDownTip"><![CDATA[Move down]]></data>
+  <data name="en_controlBar_dpadopenFsTip"><![CDATA[Enter fullscreen]]></data>
+  <data name="en_controlBar_dpadcloseFsTip"><![CDATA[Exit fullscreen]]></data>
+  <data name="en_controlBar_dpadautorotateOnTip"><![CDATA[Start autorotation]]></data>
+  <data name="en_controlBar_dpadautorotateOffTip"><![CDATA[Stop autorotation]]></data>
+  <data name="en_controlBar_dpadsoundsOnTip"><![CDATA[Start sounds]]></data>
+  <data name="en_controlBar_dpadsoundsOffTip"><![CDATA[Stop sounds]]></data>
+  <data name="en_controlBar_dpadgyroOnTip"><![CDATA[Enable gyroscope]]></data>
+  <data name="en_controlBar_dpadgyroOffTip"><![CDATA[Disable gyroscope]]></data>
+  <data name="en_controlBar_dpaddisplayControlsTip"><![CDATA[Show controls]]></data>
+  <data name="en_controlBar_dpadhideControlsTip"><![CDATA[Hide controls]]></data>
+  <data name="en_controlBar_dpadctrlmodeDragTip"><![CDATA[Change control mode]]></data>
+  <data name="en_controlBar_dpadctrlmodeMoveTip"><![CDATA[Change control mode]]></data>
+  <data name="en_logowebsiteurl"><![CDATA[http://vk.com/konfetti_kids]]></data>
+  <data name="en_logotooltipText"><![CDATA[Open website]]></data>
+
+
+
+
+
+
+
+
+
+</krpano>

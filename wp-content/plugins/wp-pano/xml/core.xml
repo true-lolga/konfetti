@@ -1,0 +1,133 @@
+﻿<krpano>
+
+	<cms wp_pano_check="1" pano="" is_admin="false" is_front="false" post_title="" post_thumbnail="" preview="" count="0" vtourpath="" />
+	
+	<view fov="91.1"/>
+	
+	<events name="wppano_events" keep="true"
+			onpreviewcomplete=""
+			OnNewPano = "wppano_OnNewPano();"
+			onxmlcomplete = ""
+	/>
+	
+	<layer name="wppano_mildot" keep="true" enabled="false" width="100%" height="100%" align="center" zorder="99" visible="false" type="container">
+		<layer name="wppano_mildot_horizontal" width="100" height="50%" align="top" edge="top" bgborder="0,0,1,0 0xFF0000" type="container"/>
+		<layer name="wppano_mildot_vertical" width="50%" height="100" align="left" edge="left" bgborder="0,1,0,0 0xFF0000" type="container"/>
+	</layer>
+	
+	<contextmenu>
+		<item name="wp_pano" caption="Made in WP-Pano content manager" onclick="openurl('http://wp-pano.com',_blank);" />
+	</contextmenu>
+	
+	<action name="wppano_OnNewPano">
+		if(xml.url!='', 
+			copy(cms.pano, xml.url);
+			subtxt(cms.pano, get(cms.pano), get(cms.vtourpath.length)););
+		trace('Action: wppano_OnNewPano');
+		copy(cms.preview, preview.url);
+		subtxt(cms.preview, get(cms.preview), get(cms.vtourpath.length));
+		set(cms.count, 0);
+		if(cms.is_admin == 'true',
+			trace('Action (js call): wppano_JS_OnNewPano vtour_name=', get(vtour_name), ' Pano=', get(cms.pano), ' Scene=', get(xml.scene));
+			js(wppano_JS_OnNewPano(get(vtour_name), get(cms.pano), get(xml.scene)));
+			,
+			set(cms.is_admin, 'not_true');
+			);
+		if(cms.is_front, 
+			trace('Action: wppano_GetAllHotspots: vtour_name=', get(vtour_name), ' Pano=', get(cms.pano), ' Scene=', get(xml.scene));
+			js(wppano_GetAllHotspots(get(vtour_name), get(cms.pano), get(xml.scene)));
+			);
+	</action>
+	
+	<action name="wppano_OnCoreStartup" autorun="preinit">
+		copy(cms.pano, xml.url);
+		subtxt(cms.pano, get(cms.pano), get(cms.vtourpath.length));
+		trace('Action: wppano_OnCoreStartup: Pano=', get(cms.pano), ' Scene=', get(xml.scene));
+	</action>	
+
+	<action name="front_init">
+		set(cms.is_front, true);
+	</action>
+	
+	<action name="admin_init">
+		set(layer['wppano_mildot'].visible, true);
+		wppano_athatv();	
+		if(cms.is_admin != 'not_true',
+			set(cms.is_admin, true);
+			,
+			set(cms.is_admin, true);
+			wppano_JS_OnNewPano();
+			);
+	</action>
+	
+	<action name="wppano_AddNewHotspot"> <!-- wppano_AddNewHotspot(ID, ath, atv, style) -->
+		txtadd(hotspotname, 'wppano_hotspot_', get(cms.count), '_', %1);
+		inc(cms.count);
+		trace('Action: wppano_AddNewHotspot: ', get(hotspotname), '(', %1, ', ', %2, ', ', %3, ', ', %4, ');');
+		addhotspot(get(hotspotname));
+		set(hotspot[get(hotspotname)].ID, %1);
+		set(hotspot[get(hotspotname)].ath, %2);
+		set(hotspot[get(hotspotname)].atv, %3);
+		copy(hotspot[get(hotspotname)].post_title, cms.post_title);
+		copy(hotspot[get(hotspotname)].post_thumbnail, cms.post_thumbnail);
+		hotspot[get(hotspotname)].loadstyle(%4);
+		if( hotspot[get(hotspotname)].onclick , 
+			txtadd(hotspot[get(hotspotname)].onclick, get(hotspot[get(hotspotname)].onclick), ' wppano_OpenPost(', %1, ');');
+			,  <!-- else -->
+			txtadd(hotspot[get(hotspotname)].onclick, 'wppano_OpenPost(', %1, ');');
+			);
+	</action>
+	
+	<action name="wppano_Adminwppano_AddNewHotspot"> <!-- wppano_AddNewHotspot(ID, ath, atv, style) -->
+		txtadd(hotspotname, 'wppano_hotspot', %1, '_', get(cms.count));
+		inc(cms.count);
+		trace('Action: wppano_Adminwppano_AddNewHotspot: ', get(hotspotname), '(', %1, ', ', %2, ', ', %3, ', ', %4, ', ', %5,')');
+		addhotspot(get(hotspotname));
+		set(hotspot[get(hotspotname)].ID, %1);
+		set(hotspot[get(hotspotname)].ath, %2);
+		set(hotspot[get(hotspotname)].atv, %3);
+		copy(hotspot[get(hotspotname)].post_title, cms.post_title);
+		hotspot[get(hotspotname)].loadstyle(%4);
+		if( hotspot[get(hotspotname)].onclick , 
+			txtadd(hotspot[get(hotspotname)].onclick, get(hotspot[get(hotspotname)].onclick), ' wppano_OpenPost(', %1, ');');
+			,  <!-- else -->
+			txtadd(hotspot[get(hotspotname)].onclick, 'wppano_OpenPost(', %1, ');');
+			);		
+	</action>
+	
+	<action name="wppano_OpenPost"> <!-- wppano_OpenPost(ID) -->
+		trace('Action: wppano_OpenPost ID = ',%1);
+		js(wppano_open_post(%1));
+	</action>	
+	
+	<action name="wppano_RemoveHotspot"> <!-- wppano_RemoveHotspot(ID) -->
+		trace('Action: wppano_RemoveHotspot ID = ',%1);
+		for(set(i, 0), i LT hotspot.count, inc(i),
+			if(hotspot[%i].ID == %1,
+				removehotspot(get(hotspot[%i].name));
+				);
+			);	
+	</action>
+	
+	<action name="wppano_UpdateHotspot"> <!-- wppano_UpdateHotspot(ID, ath, atv) -->
+		trace('Action: wppano_RemoveHotspot ID = ',%1);
+		for(set(i, 0), i LT hotspot.count, inc(i),
+			if(hotspot[%i].ID == %1,
+				set(hotspot[%i].ath, %2);
+				set(hotspot[%i].atv, %3);
+				);
+			);	
+	</action>	
+	
+	<action name="wppano_athatv">
+		copy(xcenter,stagewidth);
+		copy(ycenter,stageheight);
+		div(xcenter,2);
+		div(ycenter,2);
+		screentosphere(xcenter, ycenter, hcenter, vcenter2);
+		delayedcall(0, wppano_athatv());
+		roundval(hcenter, 5); roundval(vcenter2, 5);
+		js(pos_update(get(hcenter), get(vcenter2)));
+	</action>	
+	
+</krpano>

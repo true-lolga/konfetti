@@ -1,0 +1,41 @@
+/*
+ Theme Name:   Athena Child
+ Theme URI:    https://smartcatdesign.net/articles/athena-responsive-multipurpose-wordpress-theme/
+ Description:  Athena Child Theme
+ Author:       Olga Kuvshinova
+ Author URI:   http://lolga.org
+ Template:     Athena
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:        black, blue, green, pink, red, yellow, dark, light, full-width-template, threaded-comments, responsive-layout, left-sidebar, featured-images, right-sidebar, one-column, two-columns, three-columns, custom-colors, theme-options, translation-ready, photoblogging
+ Text Domain:  Athens
+*/
+
+@import url("../athena/style.css");
+
+/* header */
+
+div.header-inner {
+	height: 120px;
+}
+
+#primary-menu {
+	margin-top: 5%;
+}
+
+/*h1.site-title {
+	margin-top: 5%;
+}*/
+
+athena-footer > div {
+    overflow: hidden;
+    background: rgba(54, 179, 168, 0.21);
+}
+
+.site-info {
+    background: #1B1B1B;
+    color: #e1e1e1;
+    padding: 40px;
+    text-align: center;
+    position: relative;
